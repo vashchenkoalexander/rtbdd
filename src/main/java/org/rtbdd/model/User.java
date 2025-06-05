@@ -8,17 +8,23 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jdk.jfr.Timestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotEmpty
     private String username;
@@ -27,25 +33,50 @@ public class User {
     private String email;
 
     @NotEmpty
-    private String password_hash;
+    private String password;
 
     private Role role;
 
     @Timestamp
-    private Date created_at;
+    private LocalDateTime createdAt;
 
     public User(){}
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.toString()));
     }
 
     public @NotEmpty String getUsername() {
         return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setUsername(@NotEmpty String username) {
@@ -60,12 +91,12 @@ public class User {
         this.email = email;
     }
 
-    public @NotEmpty String getPassword_hash() {
-        return password_hash;
+    public @NotEmpty String getPassword() {
+        return password;
     }
 
-    public void setPassword_hash(@NotEmpty String password_hash) {
-        this.password_hash = password_hash;
+    public void setPassword(@NotEmpty String password) {
+        this.password = password;
     }
 
     public Role getRole() {
@@ -76,11 +107,11 @@ public class User {
         this.role = role;
     }
 
-    public Date getCreated_at() {
-        return created_at;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

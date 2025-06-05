@@ -1,6 +1,7 @@
 package org.rtbdd.repository;
 
 import org.junit.jupiter.api.Test;
+import org.rtbdd.model.Role;
 import org.rtbdd.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -23,8 +24,9 @@ class UserRepositoryTest {
     void baseTest() {
         User user = new User();
         user.setUsername("123");
-        user.setPassword_hash("asdfasdf");
+        user.setPassword("asdfasdf");
         user.setEmail("12345@gmail.com");
+        user.setRole(Role.ROLE_ADMIN);
         User insertedUser = userRepository.save(user);
 
         assertThat(insertedUser).isEqualTo(user);
