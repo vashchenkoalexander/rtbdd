@@ -1,5 +1,6 @@
 package org.rtbdd.controller;
 
+import jakarta.annotation.security.RolesAllowed;
 import org.rtbdd.jwt.JwtAuthenticationResponse;
 import org.rtbdd.jwt.LogInRequest;
 import org.rtbdd.model.User;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
 @RestController
@@ -34,9 +37,15 @@ public class UserController {
         return authService.logIn(request);
     }
 
-    @GetMapping("current")
+    @GetMapping("/current")
     public User getCurrentUser(){
         return userService.getCurrentUser();
+    }
+
+    @GetMapping("/all")
+    @RolesAllowed("ADMIN")
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 
 }
