@@ -1,5 +1,5 @@
 package org.rtbdd.model;
 
 public enum Role {
-    ADMIN, BIDDER
+    ROLE_ADMIN, ROLE_BIDDER
 }
