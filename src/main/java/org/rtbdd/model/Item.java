@@ -1,26 +1,34 @@
 package org.rtbdd.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Future;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 public class Item {
 
     @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "users_id", referencedColumnName = "id")
-    private User user_id;
+    private User user;
 
     private String title;
     private String description;
     private Float startPrice;
-    private Date startTime;
+    private LocalDateTime startTime;
+    @Future(message = "end time of item on auction must be in future")
+    private LocalDateTime endTime;
+    private ItemStatus status;
 
     public ItemStatus getStatus() {
         return status;
@@ -30,19 +38,19 @@ public class Item {
         this.status = status;
     }
 
-    public Date getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 
-    public Date getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
@@ -70,12 +78,12 @@ public class Item {
         this.title = title;
     }
 
-    public User getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Integer getId() {
@@ -85,7 +93,4 @@ public class Item {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    private Date endTime;
-    private ItemStatus status;
 }

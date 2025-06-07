@@ -57,8 +57,6 @@ public class AuthService {
         } catch (BadCredentialsException e) {
             // Handle incorrect credentials
             throw new BadCredentialsException("Invalid username or password");
-        } catch (UsernameNotFoundException e) {
-            throw new UsernameNotFoundException("Invalid username.");
         }
 
         // Load user details after successful authentication
