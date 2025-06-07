@@ -1,5 +1,7 @@
 package org.rtbdd.service;
 
+import org.rtbdd.exception.UserAlreadyExistsException;
+import org.rtbdd.exception.UserNotFoundException;
 import org.rtbdd.model.User;
 import org.rtbdd.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,11 +33,11 @@ public class UserService {
      */
     public User create(User user){
         if(userRepository.existsByUsername(user.getUsername())){
-            throw new RuntimeException("User with this username already exists");
+            throw new UserAlreadyExistsException("User with this username already exists");
         }
 
         if(userRepository.existsByEmail(user.getEmail())){
-            throw new RuntimeException("User with this email already exists");
+            throw new UserAlreadyExistsException("User with this email already exists");
         }
 
         return save(user);
@@ -46,7 +48,7 @@ public class UserService {
     }
 
     public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
+        return userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User not found"));
     }
 
     public UserDetailsService getUserDetailsService() {
