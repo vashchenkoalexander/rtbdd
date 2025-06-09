@@ -9,14 +9,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Future;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 public class Item {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "users_id", referencedColumnName = "id")
@@ -25,6 +24,7 @@ public class Item {
     private String title;
     private String description;
     private Float startPrice;
+    private Float currentPrice;
     private LocalDateTime startTime;
     @Future(message = "end time of item on auction must be in future")
     private LocalDateTime endTime;
@@ -86,11 +86,19 @@ public class Item {
         this.user = user;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public Float getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(Float currentPrice) {
+        this.currentPrice = currentPrice;
     }
 }

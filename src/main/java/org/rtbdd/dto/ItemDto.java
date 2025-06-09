@@ -5,20 +5,21 @@ import org.rtbdd.model.ItemStatus;
 import java.time.LocalDateTime;
 
 public class ItemDto {
-    private Integer id;
+    private Long id;
     private Long userId;
     private String title;
     private String description;
+    private Float currentPrice;
     private Float startPrice;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private ItemStatus status;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -78,5 +79,11 @@ public class ItemDto {
         this.status = status;
     }
 
-    // Getters and Setters
+    public Float getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(Float currentPrice) {
+        this.currentPrice = currentPrice;
+    }
 }
