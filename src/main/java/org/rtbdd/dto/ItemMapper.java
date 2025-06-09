@@ -13,6 +13,7 @@ public class ItemMapper {
         dto.setUserId(item.getUser() != null ? item.getUser().getId() : null);
         dto.setTitle(item.getTitle());
         dto.setDescription(item.getDescription());
+        dto.setCurrentPrice(item.getCurrentPrice());
         dto.setStartPrice(item.getStartPrice());
         dto.setStartTime(item.getStartTime());
         dto.setEndTime(item.getEndTime());

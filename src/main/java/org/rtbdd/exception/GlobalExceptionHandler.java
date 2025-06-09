@@ -1,6 +1,7 @@
 package org.rtbdd.exception;
 
 import jakarta.validation.ConstraintViolationException;
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -38,6 +39,14 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<Map<String, String>> handleBadCredentials(BadCredentialsException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("exception", ex.getClass().toString());
+        error.put("error", ex.getMessage());
+        return ResponseEntity.badRequest().body(error);
+    }
+
+    @ExceptionHandler(UserBiddingItemException.class)
+    public ResponseEntity<Map<String, String>> handleUserBiddingItem(UserBiddingItemException ex) {
         Map<String, String> error = new HashMap<>();
         error.put("exception", ex.getClass().toString());
         error.put("error", ex.getMessage());
