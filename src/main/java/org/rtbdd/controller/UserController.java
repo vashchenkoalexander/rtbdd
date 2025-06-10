@@ -16,8 +16,10 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v0.1/user")
+@RequestMapping(UserController.API_VERSION)
 public class UserController {
+
+    public static final String API_VERSION = "${api.version}" + "user";
 
     private final UserService userService;
     private final AuthService authService;
