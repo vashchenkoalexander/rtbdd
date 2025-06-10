@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(ItemController.API_VERSION)
+@RequestMapping("${api.version}/item")
 public class ItemController {
-
-    public static final String API_VERSION = "${api.version}" + "item";
 
     private final ItemService itemService;
     public ItemController(ItemService itemService) {

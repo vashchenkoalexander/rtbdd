@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(BidController.API_VERSION)
+@RequestMapping("${api.version}/bid")
 public class BidController {
-
-    public static final String API_VERSION = "${api.version}" + "bid";
 
     private final BidService bidService;
 
