@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v0.1/bid")
+@RequestMapping("${api.version}/bid")
 public class BidController {
 
     private final BidService bidService;
